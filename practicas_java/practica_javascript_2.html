@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Alumnos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      width: 300px;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    td:first-child {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      width: 40%;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #foto {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      margin-top: 10px;
+      border: 2px solid #ddd;
+    }
+
+    .botones-alumnos, .botones-control {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <h2>Datos del Alumno</h2>
+
+  <!-- Botones de selección de alumno -->
+  <div class="botones-alumnos">
+    <button onclick="Muestra(0)">Juan</button>
+    <button onclick="Muestra(1)">María</button>
+    <button onclick="Muestra(2)">Pedro</button>
+    <button onclick="Muestra(3)">Lucía</button>
+  </div>
+
+  <!-- Tabla de datos -->
+  <table>
+    <tr><td>Nombre</td><td id="nombre"></td></tr>
+    <tr><td>Apellidos</td><td id="apellido"></td></tr>
+    <tr><td>Edad</td><td id="edad"></td></tr>
+    <tr><td>Puntos</td><td id="puntos"></td></tr>
+    <tr><td>Faltas</td><td id="faltas"></td></tr>
+  </table>
+
+  <img id="foto" src="" alt="Foto del alumno">
+
+  <!-- Botones de control -->
+  <div class="botones-control">
+    <button onclick="sumarPuntos()">+ Puntos</button>
+    <button onclick="sumarFaltas()">+ Faltas</button>
+  </div>
+
+  <script>
+    // Creamos la matriz alumnos
+    var alumnos = new Array();
+
+    // Creamos los objetos alumno
+    alumnos[0] = {nombre: "Juan", apellido: "Pérez", edad: 16, puntos: 0, faltas: 0, foto: "https://via.placeholder.com/120x120?text=Juan"};
+    alumnos[1] = {nombre: "María", apellido: "López", edad: 17, puntos: 0, faltas: 0, foto: "https://via.placeholder.com/120x120?text=Maria"};
+    alumnos[2] = {nombre: "Pedro", apellido: "Martín", edad: 16, puntos: 0, faltas: 0, foto: "https://via.placeholder.com/120x120?text=Pedro"};
+    alumnos[3] = {nombre: "Lucía", apellido: "García", edad: 17, puntos: 0, faltas: 0, foto: "https://via.placeholder.com/120x120?text=Lucia"};
+
+    // Variable para saber cuál alumno está seleccionado
+    var alumnoActual = null;
+
+    // Función para mostrar los datos de un alumno en la tabla
+    function Muestra(indice) {
+      alumnoActual = indice;
+      document.getElementById("nombre").innerText = alumnos[indice].nombre;
+      document.getElementById("apellido").innerText = alumnos[indice].apellido;
+      document.getElementById("edad").innerText = alumnos[indice].edad;
+      document.getElementById("puntos").innerText = alumnos[indice].puntos;
+      document.getElementById("faltas").innerText = alumnos[indice].faltas;
+      document.getElementById("foto").src = alumnos[indice].foto;
+    }
+
+    // Función para sumar puntos
+    function sumarPuntos() {
+      if (alumnoActual !== null) {
+        alumnos[alumnoActual].puntos++;
+        Muestra(alumnoActual); // actualizamos la vista
+      } else {
+        alert("Selecciona un alumno primero.");
+      }
+    }
+
+    // Función para sumar faltas
+    function sumarFaltas() {
+      if (alumnoActual !== null) {
+        alumnos[alumnoActual].faltas++;
+        Muestra(alumnoActual);
+      } else {
+        alert("Selecciona un alumno primero.");
+      }
+    }
+  </script>
+</body>
+</html>
